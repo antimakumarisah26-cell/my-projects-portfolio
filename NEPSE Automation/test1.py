@@ -15,9 +15,9 @@ folder_path = os.path.join(desktop, "NEPSE_Data")
 
 if not os.path.exists(folder_path):
     os.makedirs(folder_path)
-    print(f"✅ Folder created: {folder_path}")
+    print(f" Folder created: {folder_path}")
 else:
-    print(f"✅ Folder already exists: {folder_path}")
+    print(f"Folder already exists: {folder_path}")
 
 print("Step 2: Opening browser and NEPSE website...")
 # Browser start karo
@@ -37,14 +37,14 @@ print("Step 4: Clicking N's Day Trading link...")
 # N's Day link click
 try:
     driver.find_element(By.XPATH, "/html/body/app-root/div/app-header/header/div[1]/div/nav/div/div/ul/li[2]/div/div[5]/a").click()
-    print("✅ Clicked using full XPath")
+    print("Clicked using full XPath")
 except:
     try:
         driver.find_element(By.XPATH, "//a[contains(text(),'Trading Average Price')]").click()
-        print("✅ Clicked using text search")
+        print(" Clicked using text search")
     except:
         driver.get("https://www.nepalstock.com/todaysprice")
-        print("✅ Navigated directly")
+        print(" Navigated directly")
 
 time.sleep(3)
 
@@ -67,13 +67,13 @@ print("Step 7: Extracting data...")
 headers = [th.text for th in driver.find_elements(By.TAG_NAME, "th")]
 data_cells = [td.text for td in driver.find_elements(By.TAG_NAME, "td")]
 
-print(f"✅ Found {len(headers)} headers and {len(data_cells)} data cells")
+print(f"Found {len(headers)} headers and {len(data_cells)} data cells")
 
 # Data organize karo
 num_cols = len(headers)
 rows = [data_cells[i:i + num_cols] for i in range(0, len(data_cells), num_cols)]
 
-print(f"✅ Organized into {len(rows)} rows")
+print(f" Organized into {len(rows)} rows")
 
 print("Step 8: Closing browser...")
 # Browser band karo
@@ -94,20 +94,20 @@ file_path = os.path.join(folder_path, "NEPSE_180days.xlsx")
 wb.save(file_path)
 
 print("\n" + "="*50)
-print("✅ SUCCESS SUMMARY")
+print(" SUCCESS SUMMARY")
 print("="*50)
-print(f"✅ Folder location: {folder_path}")
-print(f"✅ File saved as: NEPSE_180days.xlsx")
-print(f"✅ Full path: {file_path}")
-print(f"✅ Total headers: {len(headers)}")
-print(f"✅ Total rows saved: {len(rows)}")
+print(f" Folder location: {folder_path}")
+print(f" File saved as: NEPSE_180days.xlsx")
+print(f" Full path: {file_path}")
+print(f" Total headers: {len(headers)}")
+print(f"Total rows saved: {len(rows)}")
 print("="*50)
 
 # Folder open karne ke liye (Windows)
 try:
     os.startfile(folder_path)
-    print("✅ Folder opened automatically!")
+    print(" Folder opened automatically!")
 except:
-    print("⚠️ Could not open folder automatically")
+    print(" Could not open folder automatically")
 
-print("\n🎉 Script completed successfully!")
+print("\n Script completed successfully!")
